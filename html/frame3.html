@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>文档</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <style>
+        .empty {
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .myth {
+            background-color: #666;
+            height: 40px;
+            line-height: 40px;
+            color: #FFF;
+            width: auto;
+            max-width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="empty">登陆页面</div>
+    <div class="" style="background-color:red;color:#FFF;" id="a">
+
+    </div>
+    <div class="myth" onclick="login();">
+        login
+    </div>
+    <hr>
+    <div class="myth" onclick="signout();">
+        sign out
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        user = $api.getStorage('username');
+        console.log(user);
+        if (user == "") {
+            alert('user not login');
+            var a=$api.dom('#a');
+            $api.html(a,'<h1>没登陆</h1>');
+        } else {
+            alert('user had login');
+            var a=$api.dom('#a');
+            $api.html(a,'<h1>登陆了</h1>');
+        }
+    }
+
+    function login() {
+        var name = "myth";
+        $api.setStorage("username", name);
+        alert('login success');
+        var js = 'location.reload();';
+        api.execScript({
+            frameName: 'frame3',
+            script: js
+        });
+
+    }
+
+    function signout() {
+        //var name = "myth";
+        $api.setStorage("username", '');
+        alert('signout success');
+        var js = 'location.reload();';
+        api.execScript({
+            frameName: 'frame3',
+            script: js
+        });
+
+    }
+</script>
+
+</html>
