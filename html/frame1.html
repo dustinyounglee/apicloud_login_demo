@@ -13,5 +13,46 @@
 </head>
 <body>
     <div class="empty">端API</div>
+    <div id="a"></div>
 </body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.setCustomRefreshHeaderInfo({
+            bgColor: '#C0C0C0',
+            isScale: true,
+            image: {
+              pull: [
+                  'widget://image/dropdown_anim_00.png',
+                  'widget://image/dropdown_anim_01.png',
+                  'widget://image/dropdown_anim_02.png',
+                  'widget://image/dropdown_anim_03.png',
+                  'widget://image/dropdown_anim_04.png',
+                  'widget://image/dropdown_anim_05.png',
+                  'widget://image/dropdown_anim_06.png',
+                  'widget://image/dropdown_anim_07.png',
+                  'widget://image/dropdown_anim_08.png',
+                  'widget://image/dropdown_anim_09.png',
+                  'widget://image/dropdown_anim_10.png',
+            ],
+            load: [
+              'widget://image/dropdown_loading_00.png',
+              'widget://image/dropdown_loading_01.png',
+              'widget://image/dropdown_loading_02.png'
+            ]
+            }
+        }, function() {
+            //下拉刷新被触发，自动进入加载状态，使用 api.refreshHeaderLoadDone() 手动结束加载中状态
+            //下拉刷新被触发，使用 api.refreshHeaderLoadDone() 结束加载中状态
+            alert('开始加载刷新数据，摇一摇停止加载状态');
+            api.addEventListener({
+                name: 'shake'
+            }, function(ret, err) {
+                api.refreshHeaderLoadDone()
+            });
+            var a=$api.dom('#a');
+            $api.html(a,'<h1>页面2刷新了</h1>'+new Date());
+        });
+    }
+</script>
 </html>
